@@ -3,8 +3,10 @@ import { useState } from 'react';
 import MovieList from './MovieList'
 import Filter from './Filter'
 import AddMovie from './AddMovie'
+import Rating from './Rating';
 const App =()=>{
   const [filter,setFilter]=useState("")
+  const [rating,setRating]=useState("")
   const [movie,setMovie]=useState([
     {
       title:"Catch Me If You Can",
@@ -21,12 +23,15 @@ const App =()=>{
     {
       title:"The Godfather",
       description:"An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.",
-      posterURL:"data:image/jpeg;base64,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",
+      posterURL:"https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
       rating:"5"
     }
   ])
     const handleFilter=(val)=>{
       setFilter(val);
+    }
+    const handleRating=(val)=>{
+      setRating(val);
     }
     const handleAddMovie=(val)=>{
       setMovie([...movie,val]);
@@ -34,10 +39,14 @@ const App =()=>{
     return (
       <div>
         <div style={{display: 'flex', justifyContent: 'space-around' , backgroundColor:'orange'}}>
-          <Filter handleFilter={handleFilter}/>
+          <h1>MovieApp</h1>
+          <div>
+            <Filter handleFilter={handleFilter}/>
+            <Rating handleRating={handleRating}/>
+          </div>
           <AddMovie handleAddMovie={handleAddMovie}/>
         </div>
-        <MovieList  list={movie.filter(elm=>elm.title.toUpperCase().includes(filter.toUpperCase()))} />
+        <MovieList  list={movie.filter(elm=>elm.title.toUpperCase().includes(filter.toUpperCase())).filter(elm=>elm.rating.includes(rating))} />
       </div>
     )
   
